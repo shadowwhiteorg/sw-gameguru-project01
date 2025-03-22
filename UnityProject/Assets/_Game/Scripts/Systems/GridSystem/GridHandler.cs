@@ -15,6 +15,8 @@ namespace _Game.Systems.GridSystem
         {
             if(!CurrentGrid.XObjects.ContainsKey(gridPos)) return;
             CurrentGrid.XObjects[gridPos].SetActive(false);
+            CurrentGrid.GridElements[gridPos] = 0;
+            _currentGrid.XObjects.Remove(gridPos);
         }
     }
 }

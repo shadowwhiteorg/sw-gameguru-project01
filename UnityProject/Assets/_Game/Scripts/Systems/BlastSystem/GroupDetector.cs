@@ -7,16 +7,17 @@ namespace _Game.Scripts.Systems.BlastSystem
 {
     public class GroupDetector : Singleton<GroupDetector>
     {
+        [SerializeField] private int minGroupSize = 3;
         public void BlastConnectedSquares(Vector2Int startPos)
         {
             if (!GridHandler.Instance.CurrentGrid.XObjects.ContainsKey(startPos)) return;
             
             HashSet<Vector2Int> squaresToBlast = new();
             FindConnectedX(startPos, squaresToBlast);
-            if(squaresToBlast.Count < 3) return;
+            if(squaresToBlast.Count < minGroupSize) return;
             foreach (var square in squaresToBlast)
             {
-                GridHandler.Instance.BlastX(startPos);
+                GridHandler.Instance.BlastX(square);
             }
         }
         
