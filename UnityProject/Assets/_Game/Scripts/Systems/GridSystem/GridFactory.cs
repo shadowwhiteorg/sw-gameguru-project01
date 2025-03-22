@@ -1,4 +1,5 @@
 ﻿using System;
+using _Game.Scripts.Systems.BlastSystem;
 using _Game.Systems.CameraSystem;
 using _Game.Utils;
 using UnityEngine;
@@ -26,8 +27,9 @@ namespace _Game.Systems.GridSystem
             if(gridSize<minGridSize)
                 gridSize = minGridSize;
             _grid?.ResetGrid();
-            CameraManager.Instance.SetCameraSize(gridSize);
             _grid = new Grid(gridSize,cellSize);
+            CameraManager.Instance.SetCameraSize(gridSize);
+            GridHandler.Instance.SetCurrentGrid(_grid);
             for (int row = 0; row < gridSize; row++)
             {
                 for (int col = 0; col < gridSize; col++)
@@ -46,6 +48,7 @@ namespace _Game.Systems.GridSystem
             // TODO: Implement Object Pooling
             var xElement = Instantiate(xPrefab, (Vector2)_grid.GridToWorldPosition(_grid.WorldToGridPosition(position)), Quaternion.identity);
             _grid.RegisterCell(_grid.WorldToGridPosition(position),false, xElement);
+            GroupDetector.Instance.BlastConnectedSquares(_grid.WorldToGridPosition(position));
         }
         
         private void OnGridSizeChanged(int size)
