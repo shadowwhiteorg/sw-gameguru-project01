@@ -1,4 +1,5 @@
 ﻿using System;
+using _Game.Systems.CameraSystem;
 using _Game.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +26,7 @@ namespace _Game.Systems.GridSystem
             if(gridSize<minGridSize)
                 gridSize = minGridSize;
             _grid?.ResetGrid();
+            CameraManager.Instance.SetCameraSize(gridSize);
             _grid = new Grid(gridSize,cellSize);
             for (int row = 0; row < gridSize; row++)
             {
