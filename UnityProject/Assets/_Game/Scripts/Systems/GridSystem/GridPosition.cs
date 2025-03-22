@@ -17,9 +17,9 @@ namespace _Game.Systems.GridSystem
         {
             float x = gridPosition.x * grid.CellSize;
             float y = gridPosition.y * grid.CellSize;
-            float centerY = -(grid.GridSize * grid.CellSize) / 2f;
-            float centerX = -(grid.GridSize * grid.CellSize) / 2f;
-            return new Vector2(x + centerX, y+ centerY);
+            float centerY = (grid.GridSize -1) * grid.CellSize/2f ;
+            float centerX = (grid.GridSize -1) * grid.CellSize/2f;
+            return new Vector2(x - centerX, y- centerY);
         }
     }
 }

@@ -16,14 +16,14 @@ namespace _Game.Systems.GridSystem
             _gridElements = new Dictionary<Vector2Int,int>();
         }
 
-        public void RegisterCell(bool isEmpty,Vector2Int cellPosition)
+        public void RegisterCell(Vector2Int cellPosition,bool isEmpty = true)
         {
             _gridElements[cellPosition] = isEmpty ? 0 : 1;
         }
 
-        private bool IsCellEmpty(int row, int col)
+        public bool IsCellAvailable(Vector2Int cellPosition)
         {
-            return _gridElements.TryGetValue(new Vector2Int(col, row), out _);
+            return !( _gridElements.TryGetValue(cellPosition, out var result) && result != 0 );
         }
     }
 }
