@@ -6,12 +6,19 @@ namespace _Game.Systems.InputSystem
 {
     public class InputHandler : MonoBehaviour
     {
-        
+        private Camera _camera;
+
+        private void Start()
+        {
+            _camera = Camera.main;
+        }
+
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                GridFactory.Instance.GenerateXObject(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                if (_camera)
+                    GridFactory.Instance.GenerateXObject(_camera.ScreenToWorldPoint(Input.mousePosition));
             }
         }
     }
