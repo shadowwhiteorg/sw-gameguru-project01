@@ -12,17 +12,19 @@ namespace _Game.Systems.GridSystem
         private void Start()
         {
             BuildGrid();
+            
         }
 
         private void BuildGrid()
         {
+            Grid grid = new Grid(gridSize,cellSize);
             for (int row = 0; row < gridSize; row++)
             {
                 for (int col = 0; col < gridSize; col++)
                 {
                     var prefab = backgroundPrefab;
-                    // SpawnBlock(row, col, prefab);
                     Instantiate(backgroundPrefab, GetWorldPosition(row, col), Quaternion.identity, transform);
+                    grid.RegisterCell(true, new Vector2Int(row, col));
                 }
             }
         }
